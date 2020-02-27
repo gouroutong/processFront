@@ -9,10 +9,6 @@
     "build": "umi build",
     "build:sandbox": "cross-env UMI_ENV=sandbox umi build",
     "build:prod": "cross-env UMI_ENV=prod umi build",
-    "test": "umi test",
-    "lint:es": "eslint --ext .js src mock tests",
-    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "precommit": "lint-staged"
   },
   "dependencies": {
     "@rematch/core": "^1.2.0",
