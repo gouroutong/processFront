@@ -21,7 +21,6 @@ class LoginForm extends Component {
   render() {
     const {submitting, form} = this.props;
     const {getFieldDecorator} = form;
-    console.log("user",this.props.user)
     return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
@@ -47,7 +46,8 @@ class LoginForm extends Component {
             )}
           </Form.Item>
           <Form.Item>
-            <Button type="primary" loading={submitting} style={{width: '100%'}} htmlType="submit" className="login-form-button">
+            <Button type="primary" loading={submitting} style={{width: '100%'}} htmlType="submit"
+                    className="login-form-button">
               Login
             </Button>
             Or <a onClick={() => history.push("/user/register")}>register now!</a>
@@ -58,9 +58,8 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(({user,loading}) => ({
-  submitting: loading.effects.user.account,
-  user
+export default connect(({loading}) => ({
+  submitting: loading.effects.user.account
 }))(
   Form.create()(LoginForm)
 )

@@ -7,11 +7,12 @@ import {connect} from 'react-redux';
 
 
 const Avatar = props => {
-  const {style} = props;
+  const {style, dispatch} = props;
   const menus = [
     {
       id: 1,
       name: "logout",
+      onClick: () => dispatch.user.updateUser({})
     },
   ];
   const langMenu = (
@@ -31,4 +32,4 @@ const Avatar = props => {
   );
 };
 
-export default connect(({user}) => user)(Avatar);
+export default connect()(Avatar);

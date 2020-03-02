@@ -1,10 +1,9 @@
 import React from 'react';
 import {Route, Router, Switch} from 'react-router-dom';
 import history from '@/layouts/history';
-import {connect, Provider} from 'react-redux';
-import User from '@/layouts/page/user';
+import {Provider} from 'react-redux';
 import store from '@/layouts/store';
-import Process from "./page/process/";
+import Page from './page'
 
 class XProcess extends React.Component {
   constructor(props) {
@@ -17,8 +16,7 @@ class XProcess extends React.Component {
       <Provider store={store}>
         <Router history={history}>
           <Switch>
-            <Route path="/user" component={User}/>
-            <Route path="/" component={Process}/>
+            <Route path="/" component={Page}/>
           </Switch>
         </Router>
       </Provider>

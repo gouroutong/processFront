@@ -31,7 +31,7 @@ api.interceptors.response.use(
     const {code, errMsg, result} = response.data;
     if (errMsg) {
       if (code == 4001) {
-        store.dispatch.user.loginOut();
+        store.dispatch.user.updateUser({});
       }
       return Promise.reject(new Error(errMsg || 'Error'));
     } else if (result) {
