@@ -24,7 +24,6 @@ const icons = [
 const Header = props => <PageHeader
   style={{
     background: '#FFFFFF',
-    marginBottom: 5,
     padding: '5px 20px',
   }}
   onBack={history.goBack}

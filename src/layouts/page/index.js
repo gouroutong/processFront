@@ -2,8 +2,8 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import User from '@/layouts/page/user';
-import Process from "./process";
-
+import Header from "./components/Header";
+import Home from './home'
 // const testFun = (func) => {
 //   const obj = func(store);
 //   return (Component) => class extends React.Component {
@@ -12,6 +12,14 @@ import Process from "./process";
 //     }
 //   }
 // }
+const Process = () => {
+  return <div style={{display: 'flex', flex: 1, flexFlow: 'column', overflow: 'auto'}}>
+    <Header/>
+    <Switch>
+      <Route path="/home" component={Home}/>
+    </Switch>
+  </div>
+}
 
 @connect(({user}) => ({user}))
 class Page extends React.Component {
@@ -33,7 +41,9 @@ class Page extends React.Component {
   isLogin = () => {
     const {user = {}, history, location} = this.props;
     if (user.token) {
-      history.push("/");
+      if (location.pathname.startsWith("/user")) {
+        history.push("/");
+      }
       return
     }
     if (location.pathname.startsWith("/user")) {
