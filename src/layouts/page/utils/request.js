@@ -2,7 +2,7 @@ import axios from 'axios';
 import {message} from 'antd';
 import store from '@/layouts/store';
 
-export const baseUrl = `//localhost:3001/api/`;
+export const baseUrl = `//47.107.230.235:3001/api/`;
 console.log(process.env)
 // Set config defaults when creating the instance
 

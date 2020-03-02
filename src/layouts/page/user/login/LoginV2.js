@@ -6,28 +6,13 @@ import {Button, Form, Icon, Input} from 'antd';
 import history from "../../../history";
 
 class LoginForm extends Component {
-  state = {};
-
-  handleSubmit = (err, values) => {
-    const {type} = this.state;
-    if (!err) {
-      const {dispatch} = this.props;
-      dispatch.user.account({
-        ...values,
-        type,
-      });
-    }
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const {type = "account"} = this.state;
         const {dispatch} = this.props;
-        dispatch.user.account({
-          ...values,
-          type,
+        dispatch.user.login({
+          ...values
         });
       }
     });
@@ -36,6 +21,7 @@ class LoginForm extends Component {
   render() {
     const {submitting, form} = this.props;
     const {getFieldDecorator} = form;
+    console.log("user",this.props.user)
     return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
@@ -72,9 +58,9 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(({user, loading}) => ({
-  userLogin: user,
+export default connect(({user,loading}) => ({
   submitting: loading.effects.user.account,
+  user
 }))(
   Form.create()(LoginForm)
 )

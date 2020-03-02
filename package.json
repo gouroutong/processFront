@@ -8,7 +8,7 @@
     "start:test": "cross-env REACT_APP_ENV=test umi dev",
     "build": "umi build",
     "build:sandbox": "cross-env UMI_ENV=sandbox umi build",
-    "build:prod": "cross-env UMI_ENV=prod umi build",
+    "build:prod": "cross-env UMI_ENV=prod umi build"
   },
   "dependencies": {
     "@rematch/core": "^1.2.0",
