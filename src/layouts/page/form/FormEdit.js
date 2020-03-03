@@ -14,14 +14,14 @@ const FormEdit = props => {
       {Object.values(maps).map(item => {
         return <div key={item.key} onClick={() => {
           allColumn(item.key)
-          setActive(pre => pre + 1)
+          setActive(pre => properties.length)
         }}>
           {item.label}
         </div>
       })}
     </div>
     <div style={{flex: 1, margin: "0 10px", overflow: 'auto'}}>
-      <Preview properties={properties} active={active} changeActive={(newActive)=>setActive(newActive)}/>
+      <Preview properties={properties} active={active} changeActive={(newActive) => setActive(newActive)}/>
     </div>
     <div style={{flexBasis: 300}}>
       {active >= 0 && <Setting
