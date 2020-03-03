@@ -1,9 +1,11 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import User from '@/layouts/page/user';
 import Header from "./components/Header";
 import Home from './home'
+import FormPage from "./form/FormPage";
+import User from "./user";
+import FormEdit from "./form/FormEdit";
 // const testFun = (func) => {
 //   const obj = func(store);
 //   return (Component) => class extends React.Component {
@@ -17,6 +19,8 @@ const Process = () => {
     <Header/>
     <Switch>
       <Route path="/home" component={Home}/>
+      <Route path="/form" component={FormPage}/>
+      <Route path="/form-edit/:id" component={FormEdit}/>
     </Switch>
   </div>
 }
