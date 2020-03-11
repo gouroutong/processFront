@@ -6,6 +6,8 @@ import Home from './home'
 import FormPage from "./form/FormPage";
 import User from "./user";
 import FormEdit from "./form/FormEdit";
+import ProcessPage from "./process";
+import ProcessEdit from "./process/ProcessEdit";
 // const testFun = (func) => {
 //   const obj = func(store);
 //   return (Component) => class extends React.Component {
@@ -21,6 +23,8 @@ const Process = () => {
       <Route path="/home" component={Home}/>
       <Route path="/form" component={FormPage}/>
       <Route path="/form-edit/:id" component={FormEdit}/>
+      <Route path="/process" component={ProcessPage}/>
+      <Route path="/process-edit/:id" component={ProcessEdit}/>
     </Switch>
   </div>
 }
