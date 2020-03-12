@@ -2,6 +2,7 @@ import {Icon, PageHeader} from 'antd';
 import React from 'react';
 import Avatar from '@/layouts/page/components/Header/Avatar';
 import history from '@/layouts/history';
+import {connect} from "react-redux";
 
 const IconLink = (props) => {
   if (props.component) {
@@ -15,24 +16,28 @@ const IconLink = (props) => {
   );
 };
 
-const Nickname = (props) => {
-  return <div>zouzou</div>
-}
+const Nickname = connect(({user}) => user)((props) => {
+  return <span>{props.username}</span>
+})
+
+
 const icons = [
+  {
+    id: 2,
+    component: Nickname,
+  },
   {
     type: 'user',
     id: 3,
     component: Avatar,
   },
-  {
-    id: 3,
-    component: Nickname,
-  },
+
+
 ];
 const Header = props => <PageHeader
   style={{
     background: '#FFFFFF',
-    padding: '30px 20px',
+    padding: '15px',
   }}
   onBack={history.goBack}
   title={'PROCESS'}

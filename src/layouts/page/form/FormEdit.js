@@ -8,34 +8,33 @@ import {request} from "../utils/request";
 const FormEdit = props => {
   const [properties, setProperties] = React.useState([]);
   const [active, setActive] = React.useState(-1)
+  const [name, setName] = React.useState('')
   const {match, history} = props;
   const id = parseInt(match.params.id || '0');
+
   React.useEffect(() => {
     if (id > 0) {
       request('/form/item', {Id: id}).then(item => {
-        const {Id, Content} = item;
+        const {Id, Content, Name} = item;
         const properties = Content ? JSON.parse(Content) : []
         setProperties(properties)
+        setName(Name)
       })
     }
   }, [id])
   const allColumn = (key) => setProperties(properties => [...properties, {key}])
   const gridStyle = {
-    flex: 3,
+    flex: 2,
   };
   const gridCenterStyle = {
     flex: 4,
     border: 'none',
     overflow: 'auto'
   };
-  // const FormItem = e => {
-  //   e.stopPropagation();
-  //   request("/form/new", {content: JSON.stringify(properties)}).then(res => {
-  //     if (res) {
-  //       message.success("success");
-  //     }
-  //   })
-  // }
+  const rightGridStyle = {
+    flex: 3,
+  };
+
   const handleSubmit = e => {
     e.stopPropagation();
     let data = {};
@@ -43,6 +42,7 @@ const FormEdit = props => {
       data.id = id
     }
     data.content = JSON.stringify(properties)
+    data.name = name
     request("/form/new", data).then(res => {
       if (res) {
         history.goBack();
@@ -62,7 +62,7 @@ const FormEdit = props => {
         return <button key={item.key} onClick={() => {
           allColumn(item.key)
           setActive(pre => properties.length)
-        }} style={{margin:"8px 40px",backgroundColor:"#FFa",width:"100px"}}>
+        }} style={{margin: "8px 40px", backgroundColor: "#FFa", width: "100px"}}>
           {item.label}
         </button>
       })}
@@ -70,12 +70,14 @@ const FormEdit = props => {
     <Card.Grid style={gridCenterStyle}>
       <Preview properties={properties} active={active} changeActive={(newActive) => setActive(newActive)}/>
     </Card.Grid>
-    <Card.Grid style={gridStyle}>
+    <Card.Grid style={rightGridStyle}>
       {active >= 0 && <Setting
         property={properties[active]}
+        changeName={(name) => setName(name)}
+        name={name}
         changeItem={(item) => {
           let newProperties = [...properties]
-          newProperties[active] = item;
+          newProperties[active] = item
           setProperties(newProperties)
         }}/>}
     </Card.Grid>
