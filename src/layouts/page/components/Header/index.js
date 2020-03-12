@@ -14,12 +14,20 @@ const IconLink = (props) => {
     <Icon type={props.type} style={{margin: '0 10px'}}/>
   );
 };
+
+const Nickname = (props) => {
+  return <div>zouzou</div>
+}
 const icons = [
   {
     type: 'user',
     id: 3,
     component: Avatar,
-  }
+  },
+  {
+    id: 3,
+    component: Nickname,
+  },
 ];
 const Header = props => <PageHeader
   style={{
