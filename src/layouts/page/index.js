@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from "./components/Header";
-import Home from './home'
+import ProcessLayout from './home'
 import FormPage from "./form/FormPage";
 import User from "./user";
 import FormEdit from "./form/FormEdit";
@@ -19,13 +19,14 @@ import ProcessEdit from "./process/ProcessEdit";
 const Process = () => {
   return <div style={{display: 'flex', flex: 1, flexFlow: 'column', overflow: 'auto'}}>
     <Header/>
-    <Switch>
-      <Route path="/home" component={Home}/>
-      <Route path="/form" component={FormPage}/>
-      <Route path="/form-edit/:id" component={FormEdit}/>
-      <Route path="/process" component={ProcessPage}/>
-      <Route path="/process-edit/:id" component={ProcessEdit}/>
-    </Switch>
+    <ProcessLayout>
+      <Switch>
+        <Route path="/form" component={FormPage}/>
+        <Route path="/form-edit/:id" component={FormEdit}/>
+        <Route path="/process" component={ProcessPage}/>
+        <Route path="/process-edit/:id" component={ProcessEdit}/>
+      </Switch>
+    </ProcessLayout>
   </div>
 }
 
