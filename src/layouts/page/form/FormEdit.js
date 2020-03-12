@@ -59,12 +59,12 @@ const FormEdit = props => {
   >
     <Card.Grid style={gridStyle}>
       {Object.values(maps).map(item => {
-        return <div key={item.key} onClick={() => {
+        return <button key={item.key} onClick={() => {
           allColumn(item.key)
           setActive(pre => properties.length)
-        }}>
+        }} style={{margin:"8px 40px",backgroundColor:"#FFa",width:"100px"}}>
           {item.label}
-        </div>
+        </button>
       })}
     </Card.Grid>
     <Card.Grid style={gridCenterStyle}>
