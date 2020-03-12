@@ -1,4 +1,5 @@
 import {Icon, Layout, Menu} from 'antd';
+import React from "react";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -11,13 +12,8 @@ const ProcessLayout = props => {
           overflow: 'auto',
           background: "#ffffff",
           marginTop: '5px'
-          // height: '100vh',
-          // position: 'fixed',
-          // left: 0,
-
         }}
       >
-        <div className="logo"/>
         <Menu mode="inline" defaultSelectedKeys={['4']}>
           <Menu.Item key="1">
             <Icon type="user"/>
