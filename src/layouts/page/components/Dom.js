@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
-import React, {ReactElement} from 'react';
+import React from 'react';
 
-let renderReactDOM = (child, options= {}) => {
+let renderReactDOM = (child, options = {}) => {
   let div = document.createElement('div');
   let {id} = options;
   if (id) {

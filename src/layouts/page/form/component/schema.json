@@ -78,7 +78,10 @@
             "type": "range",
             "format": "dateTime",
             "ui:options": {
-              "placeholder": ["开始时间", "结束时间"]
+              "placeholder": [
+                "开始时间",
+                "结束时间"
+              ]
             }
           }
         }
@@ -90,14 +93,30 @@
           "select": {
             "title": "单选",
             "type": "string",
-            "enum": ["a", "b", "c"],
-            "enumNames": ["早", "中", "晚"]
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
+            "enumNames": [
+              "早",
+              "中",
+              "晚"
+            ]
           },
           "radio": {
             "title": "单选",
             "type": "string",
-            "enum": ["a", "b", "c"],
-            "enumNames": ["早", "中", "晚"],
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
+            "enumNames": [
+              "早",
+              "中",
+              "晚"
+            ],
             "ui:widget": "radio"
           },
           "multiSelect": {
@@ -107,8 +126,18 @@
             "items": {
               "type": "string"
             },
-            "enum": ["A", "B", "C", "D"],
-            "enumNames": ["杭州", "武汉", "湖州", "贵阳"],
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "enumNames": [
+              "杭州",
+              "武汉",
+              "湖州",
+              "贵阳"
+            ],
             "ui:widget": "multiSelect"
           },
           "boxes": {
@@ -118,8 +147,18 @@
             "items": {
               "type": "string"
             },
-            "enum": ["A", "B", "C", "D"],
-            "enumNames": ["杭州", "武汉", "湖州", "贵阳"]
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "enumNames": [
+              "杭州",
+              "武汉",
+              "湖州",
+              "贵阳"
+            ]
           }
         }
       }

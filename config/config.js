@@ -3,10 +3,8 @@
  * @date 2019-12-07 16:20
  */
 // ref: https://umijs.org/config/
-import proxy from './proxy'
 
 const {REACT_APP_ENV} = process.env;
-console.log(REACT_APP_ENV)
 const config = {
   treeShaking: true,
   plugins: [

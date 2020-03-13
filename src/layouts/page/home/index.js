@@ -1,4 +1,4 @@
-import {Icon, Layout, Menu} from 'antd';
+import {Layout} from 'antd';
 import React from "react";
 
 const {Header, Content, Footer, Sider} = Layout;

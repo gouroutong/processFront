@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, Card, Table} from "antd";
+import {Button, Card, message, Table} from "antd";
 import history from "../../history";
 import {request} from "../utils/request";
+import U from "../utils/U";
 
 const ProcessPage = props => {
   const [list, setList] = React.useState([]);
@@ -9,30 +10,47 @@ const ProcessPage = props => {
   const newProcess = (id = '0') => {
     history.push(`/process-edit/${id}`)
   }
+  const deleteProcess = (id) => {
+    request("/process/delete", {id}).then(res => {
+      message.success("删除成功")
+      fetchList()
+    })
+  }
+  const fetchList = () => {
+    request("/process/list", {}).then(list => setList(list))
+  }
   React.useEffect(() => {
-    request("/form/list", {}).then(list => setList(list))
+    fetchList()
   }, [])
   const columns = [
     {
-      title: 'name',
-      key: 'name',
+      title: 'Id',
+      key: 'Id',
       dataIndex: 'Id'
+    },
+    {
+      title: 'Name',
+      key: 'Name',
+      dataIndex: 'Name'
     },
     {
       title: 'createdAt',
       key: 'createdAt',
-      dataIndex: 'createdAt'
+      dataIndex: 'CreatedAt',
+      render: time => U.date.format(U.date.parse(time), 'yyyy-MM-dd HH:mm'),
     },
     {
-      title: 'createdBy',
-      key: 'createdBy',
-      dataIndex: 'createdBy'
+      title: 'updatedAt',
+      key: 'updatedAt',
+      dataIndex: 'UpdatedAt',
+      render: time => U.date.format(U.date.parse(time), 'yyyy-MM-dd HH:mm'),
     },
     {
       title: 'option',
       key: 'option',
       dataIndex: 'option',
-      render: (text, item) => (<><a onClick={() => newProcess(item.Id)}>edit </a> <a>delete</a></>)
+      render: (text, item) => (<><a onClick={() => newProcess(item.Id)}>edit </a> <a
+        onClick={() => deleteProcess(item.Id)}>delete</a></>)
     }
   ]
   return <div style={{flex: 1}}>

@@ -1,4 +1,4 @@
-import {Route, Switch,Redirect} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import LoginV2 from '@/layouts/page/user/login/LoginV2';
 import React from 'react';
 import UserLayout from '@/layouts/page/user/UserLayout';

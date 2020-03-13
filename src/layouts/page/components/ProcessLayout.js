@@ -1,4 +1,4 @@
-import {Layout, Menu,Icon} from 'antd';
+import {Icon, Layout, Menu} from 'antd';
 import React from "react";
 import {withRouter} from "umi";
 
@@ -17,7 +17,7 @@ const ProcessLayout = props => {
       >
         <Menu mode="inline" defaultSelectedKeys={['4']}>
           {siderData && siderData.map(item => {
-            const {label, key, route,icon} = item;
+            const {label, key, route, icon} = item;
             return (
               <Menu.Item key={key} onClick={() => history.push(route)}>
                 <Icon type={icon}></Icon>

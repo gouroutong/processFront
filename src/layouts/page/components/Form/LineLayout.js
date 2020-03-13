@@ -14,7 +14,7 @@ class LineLayout extends React.Component {
   render() {
     const {labelCol, wrapperCol, label, children, style} = this.props;
     return (
-      <Row>
+      <Row style={{margin:'10px 0'}}>
         <Col {...labelCol} style={{
           textAlign: 'right',
           marginRight: 10
