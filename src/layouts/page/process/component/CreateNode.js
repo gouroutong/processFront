@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Modal} from 'antd';
+import {Input, Modal,Button} from 'antd';
 import {closeModalContainer, createModalContainer, renderReactDOM} from '../../components/Dom';
 import {request} from '../../utils/request';
 import LineLayout from "../../components/Form/LineLayout";
@@ -12,7 +12,8 @@ class CreateNode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name
+      name: this.props.name,
+      approvers:["A","B"],
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
@@ -23,20 +24,24 @@ class CreateNode extends React.Component {
   };
 
   handleConfirm() {
-    const {success, id} = this.props;
-    const {name} = this.state;
-    request("/ipt_data/update_name", {fileName: name, dataId: id}).then(res => {
-      success && success();
-      closeModalContainer(id_div)
-    }).catch((error) => {
-      console.log(error);
-    })
+    // const {success, id} = this.props;
+    // const {name} = this.state;
+    // request("/ipt_data/update_name", {fileName: name, dataId: id}).then(res => {
+    //   success && success();
+    //   closeModalContainer(id_div)
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
+    alert("ok")
   }
 
   handleCancel() {
     closeModalContainer(id_div);
   }
 
+  addApprover(){
+    
+  }
 
   render() {
     const {title} = this.props;
@@ -50,9 +55,14 @@ class CreateNode extends React.Component {
           getContainer={() => createModalContainer(id_div)}
           visible={true}
         >
-          <LineLayout label="名称:">
+          <LineLayout label="流程名称:">
             <Input value={name} onChange={e => this.setState({name: U.getValueFromEvent(e)})}/>
           </LineLayout>
+          {this.state.approvers.map((item)=> <LineLayout label="第1位审批人:">
+            <Input value={name} onChange={e => this.setState({name: U.getValueFromEvent(e)})}/>
+          </LineLayout>)}
+         
+          <Button >添加审批人</Button>
         </Modal>
       </>
     );

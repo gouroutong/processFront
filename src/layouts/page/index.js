@@ -10,6 +10,11 @@ import ProcessPage from "./process";
 import ProcessEdit from "./process/ProcessEdit";
 import siderData from "./siderData";
 import Home from "./home";
+import Event from "./event";
+import Apply from "./apply";
+import Info from "./info";
+
+
 // const testFun = (func) => {
 //   const obj = func(store);
 //   return (Component) => class extends React.Component {
@@ -28,6 +33,9 @@ const Process = () => {
         <Route path="/form-edit/:id" component={FormEdit}/>
         <Route path="/process" component={ProcessPage}/>
         <Route path="/process-edit/:id" component={ProcessEdit}/>
+        <Route path="/event" component={Event}/>
+        <Route path="/apply" component={Apply}/>
+        <Route path="/info" component={Info}/>
         <Redirect path="/" to="/home"/>
       </Switch>
     </ProcessLayout>

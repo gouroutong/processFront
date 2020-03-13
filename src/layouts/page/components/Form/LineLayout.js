@@ -9,12 +9,6 @@ const defaultLayout = {
     xs: 15,
   },
 };
-const styles = {
-  // lineLayout: {
-  //   minHeight: 40,
-  //   lineHeight: 40,
-  // }
-}
 
 class LineLayout extends React.Component {
   render() {

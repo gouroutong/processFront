@@ -50,13 +50,18 @@ const ProcessEdit = props => {
   }
   const add = () => {
     CreateNode.open({
-      title:'创建节点',
+      title:'添加审批流程',
 
     })
   }
+
+  const close = () => {
+    history.goBack();
+  }
+
   return <Card
     size="small"
-    extra={(<><Button onClick={add}>Add</Button> <Button onClick={handleSubmit}>Save</Button></>)}
+    extra={(<><Button onClick={add}>添加审批流程</Button> <Button onClick={close}>关闭</Button> <Button onClick={handleSubmit}>Save</Button></>)}
     bordered={null}
   >
     <Table/>
