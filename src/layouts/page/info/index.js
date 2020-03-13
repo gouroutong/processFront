@@ -1,10 +1,10 @@
 import React from "react";
-import {Descriptions} from "antd";
+import {Descriptions,Card} from "antd";
 
 
 const Info = (props) =>{
     return (
-        <div>
+        <Card>
         <Descriptions
           title="我的信息"
           bordered
@@ -28,7 +28,7 @@ const Info = (props) =>{
             Region: East China 1
           </Descriptions.Item>
         </Descriptions>
-      </div>
+      </Card>
     )
 }
 
