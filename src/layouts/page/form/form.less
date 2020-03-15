@@ -1,0 +1,18 @@
+.form_component {
+  .label {
+    margin-bottom: 5px;
+
+    &.required {
+      &:before {
+        content: '* ';
+        color: red;
+      }
+    }
+  }
+}
+
+.form_control {
+  & > div {
+    margin: 10px 0;
+  }
+}

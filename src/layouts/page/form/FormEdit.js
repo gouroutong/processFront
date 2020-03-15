@@ -62,7 +62,7 @@ const FormEdit = props => {
         return <button key={item.key} onClick={() => {
           allColumn(item.key)
           setActive(pre => properties.length)
-        }} style={{margin: "8px 40px", backgroundColor: "#FFa", width: "100px"}}>
+        }} style={{margin: "8px 40px", backgroundColor: "#f1f1f1", width: "100px"}}>
           {item.label}
         </button>
       })}

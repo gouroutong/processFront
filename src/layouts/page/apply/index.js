@@ -1,10 +1,11 @@
 import React from "react";
 import {Button, Card, Table} from "antd";
 import U from "../utils/U";
+import ChooseApply from "./component/ChooseApply";
 
 const Apply = (props) => {
   // const [list, setList] = React.useState([]);
-
+  const {history} = props;
   const agree = () => {
     console.log("agree")
   }
@@ -63,11 +64,18 @@ const Apply = (props) => {
     },
   ]
 
-
+  const openChooseApply = () => {
+    ChooseApply.open({
+      newApply
+    })
+  }
+  const newApply = (id) => {
+    history.push(`/apply_edit/0?processId=${id}`)
+  }
   return (
     <Card bordered={null}>
       <div style={{marginBottom: 10}}>
-        <Button>已提交的申请</Button>
+        <Button onClick={openChooseApply}>发起申请</Button>
       </div>
       {list && <Table
         dataSource={list}

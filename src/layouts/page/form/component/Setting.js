@@ -23,6 +23,7 @@ function Setting(props) {
             ...kv
           })
         }}
+        formKey={key}
         {...restProps}
       />
     </Tabs.TabPane>

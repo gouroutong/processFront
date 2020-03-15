@@ -43,13 +43,14 @@ const config = {
   ],
   // history: 'browser',
   theme: {
-    'primary-color': '#84441e',
+    'primary-color': '#cc7e63',
+    // 'primary-color': 'pink',
   },
   urlLoaderExcludes: [/.svg$/],
 
-  // cssLoaderOptions: {
-  //   localIdentName: '[local]',
-  // },
+  cssLoaderOptions: {
+    localIdentName: '[local]',
+  },
   define: {
     REACT_APP_ENV: REACT_APP_ENV || false,
   },
