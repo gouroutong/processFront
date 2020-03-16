@@ -19,6 +19,7 @@ const config = {
           webpackChunkName: true,
           level: 3,
         },
+        useEslint:false,
         title: 'xprocess',
         dll: {
           exclude: [],
