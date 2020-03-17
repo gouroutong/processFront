@@ -1,30 +1,29 @@
-from fabric import *
+from fabric.api import *
+
+env.hosts = ['47.107.230.235']
+env.user = 'root'
 
 
 # from fabric import task
 @task
-def tar_task(c):
+def tar_task():
   # 打包
-  with c.cd("bin"):
-    c.run('tar -czvf process-server.tar.gz process-server')
-    c.run('scp process-server.tar.gz root@47.107.230.235:program/process')
+  local("yarn build")
+  local("tar -czvf dist.tar.gz dist")
+  local('scp dist.tar.gz root@47.107.230.235:/usr/share/nginx')
 
 
 @task
-def put_task(c):
-  # 创建远程服务器文件夹
-  with Connection('root@47.107.230.235') as c:
-    # 上传文件
-    with c.cd("program/process"):
-      c.run('tar -xzvf process-server.tar.gz')
-      c.run("rm -rf process-server.tar.gz")
-    with c.cd("/root"):
-      c.run('supervisorctl update')
-      c.run('supervisorctl -c supervisord.conf reload')
-      c.run("echo success")
-
+def put_task():
+  with cd("/usr/share/nginx"):
+    run('tar -xzvf dist.tar.gz')
+    run('rm -rf dist.tar.gz')
+    run('rm -rf html')
+    run('mv dist html')
+    run("systemctl restart nginx")
+    run("echo success")
 
 @task
-def deploy(c):
-  tar_task(c)
-  put_task(c)
+def deploy():
+  tar_task()
+  put_task()
