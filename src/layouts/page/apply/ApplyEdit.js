@@ -63,9 +63,10 @@ const ApplyEdit = (props) => {
     if (id > 0) {
       request('/apply/item', {id}).then((apply) => {
         const {Form, Status} = apply;
-        const length = Status == 2 ? (Form || []).length - 1 : (Form || []).length;
-        setProcessStep(length);
-        setCurrent(length);
+        const step = (Status == 2) ? (Form || []).length - 1 : (Form || []).length;
+        const current = (Status == 2 || Status == 1) ? (Form || []).length - 1 : (Form || []).length;
+        setProcessStep(step);
+        setCurrent(current);
         setApplyForm(Form);
         setStatus(Status);
       });
@@ -149,7 +150,7 @@ const ApplyEdit = (props) => {
   };
   const start = steps && steps.length > 0
   const isForm = status != 2 && current == processStep;
-  const hasOperate = start && steps[current].Operate == 1;
+  const hasOperate = start && steps[current].Opera == 1;
   return start ? <Card bordered={null} current={current}>
     <Steps
       type="navigation"
