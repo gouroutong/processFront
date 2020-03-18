@@ -9,17 +9,13 @@ env.user = 'root'
 def tar_task():
   # 打包
   local("yarn build")
-  local("tar -czvf dist.tar.gz dist")
-  local('scp dist.tar.gz root@47.107.230.235:/usr/share/nginx')
 
 
 @task
 def put_task():
+  with settings(warn_only=True):
+    put("dist/*", "/usr/share/nginx/html/")
   with cd("/usr/share/nginx"):
-    run('tar -xzvf dist.tar.gz')
-    run('rm -rf dist.tar.gz')
-    run('rm -rf html')
-    run('mv dist html')
     run("systemctl restart nginx")
     run("echo success")
 
