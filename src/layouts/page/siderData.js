@@ -3,7 +3,7 @@ import React from "react";
 const siderData = [
   {
     key: 'home',
-    label: '首页111',
+    label: '首页',
     icon: "menu",
     route: '/home',
   },

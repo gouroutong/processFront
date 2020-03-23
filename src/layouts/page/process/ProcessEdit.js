@@ -10,6 +10,8 @@ const ProcessEdit = props => {
   const [name, setName] = React.useState("");
   const {match, history} = props;
   const id = parseInt(match.params.id || '0');
+  console.log("222",id)
+
   React.useEffect(() => {
     if (id > 0) {
       request("/process/item", {id}).then(res => {
@@ -38,6 +40,7 @@ const ProcessEdit = props => {
       })
     }
   }, [id])
+
   const handleSubmit = e => {
     e.stopPropagation()
     const data = {
@@ -53,15 +56,18 @@ const ProcessEdit = props => {
     })
 
   }
+
   const add = () => {
     CreateNode.open({
       title: 'add',
       onChange: data => setList(list => [...list, data])
     })
   }
+
   const close = () => {
     history.goBack();
   }
+
   const edit = (index) => {
     CreateNode.open({
       title: 'add',
@@ -75,15 +81,17 @@ const ProcessEdit = props => {
       }
     })
   }
+
   const del = (index) => {
     setList(preList => {
       const newList = preList.filter((item, i) => i !== index)
       return newList
     })
   }
+
   return <Card
     size="small"
-    extra={(<><Button onClick={add}>添加审批流程</Button> <Button onClick={close}>关闭</Button> <Button
+    extra={(<><Button onClick={add}>添加审批节点</Button> <Button onClick={close}>关闭</Button> <Button
       onClick={handleSubmit}>Save</Button></>)}
     bordered={null}
   >
@@ -106,6 +114,7 @@ const ProcessEdit = props => {
           dataIndex: 'name',
           title: 'name'
         },
+        //TODO
         {
           key: 'action',
           dataIndex: 'act',

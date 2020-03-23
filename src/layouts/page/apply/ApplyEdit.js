@@ -40,6 +40,9 @@ const FormRender = (props) => {
   );
 };
 
+
+
+
 const ApplyEdit = (props) => {
   const {location, match, history} = props;
   const [steps, setSteps] = React.useState([]);
@@ -102,11 +105,15 @@ const ApplyEdit = (props) => {
     }
     return 'process';
   };
+
+  
   const changeContent = (value, index) => {
     const newContent = [...formContent.map((item) => ({...item}))];
     newContent[index].value = value;
     setFormContent(newContent);
   };
+
+
   const submit = (status) => {
     const data = {
       form: [
@@ -131,6 +138,8 @@ const ApplyEdit = (props) => {
       }
     });
   };
+
+
   const renderFormContent = (content) => {
     content = JSON.parse(content);
     return (

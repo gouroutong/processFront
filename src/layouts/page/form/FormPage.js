@@ -8,6 +8,7 @@ const FormPage = props => {
   const [list, setList] = React.useState([]);
 
   const newForm = (id = '0') => {
+    console.log("111",id)
     history.push(`/form-edit/${id}`)
   }
   const deleteForm = (id) => {

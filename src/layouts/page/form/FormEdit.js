@@ -34,7 +34,8 @@ const FormEdit = props => {
   const rightGridStyle = {
     flex: 3,
   };
-
+  
+//TODO
   const handleSubmit = e => {
     e.stopPropagation();
     let data = {};
@@ -58,6 +59,7 @@ const FormEdit = props => {
     bodyStyle={{flex: 1, display: 'flex', overflow: 'auto'}}
   >
     <Card.Grid style={gridStyle}>
+      <label>工具箱</label>
       {Object.values(maps).map(item => {
         return <button key={item.key} onClick={() => {
           allColumn(item.key)
