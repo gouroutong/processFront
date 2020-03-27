@@ -40,9 +40,6 @@ const FormRender = (props) => {
   );
 };
 
-
-
-
 const ApplyEdit = (props) => {
   const {location, match, history} = props;
   const [steps, setSteps] = React.useState([]);
@@ -59,15 +56,15 @@ const ApplyEdit = (props) => {
     request('/process/item', {id: processId}).then((process) => {
       const {NodeList: steps, Name} = process;
       setSteps(steps);
-      setProcessName(Name)
+      setProcessName(Name);
     });
   };
   const fetchApply = () => {
     if (id > 0) {
       request('/apply/item', {id}).then((apply) => {
         const {Form, Status} = apply;
-        const step = (Status == 2) ? (Form || []).length - 1 : (Form || []).length;
-        const current = (Status == 2 || Status == 1) ? (Form || []).length - 1 : (Form || []).length;
+        const step = Status == 2 ? (Form || []).length - 1 : (Form || []).length;
+        const current = Status == 2 || Status == 1 ? (Form || []).length - 1 : (Form || []).length;
         setProcessStep(step);
         setCurrent(current);
         setApplyForm(Form);
@@ -106,26 +103,28 @@ const ApplyEdit = (props) => {
     return 'process';
   };
 
-  
   const changeContent = (value, index) => {
     const newContent = [...formContent.map((item) => ({...item}))];
     newContent[index].value = value;
     setFormContent(newContent);
   };
 
-
   const submit = (status) => {
+    let newStatus = status == 2 ? status : processStep == steps.length - 1 ? 1 : 0;
+    let nextRole = {nextRoleId: 99999999};
+    if (newStatus == 0 && steps && steps[current + 1]) {
+      nextRole.nextRoleId = steps[current + 1].UserId;
+    }
     const data = {
       form: [
         {
-          content: JSON.stringify(
-            formContent.map(({label, value}) => ({label, value})),
-          ),
+          content: JSON.stringify(formContent.map(({label, value}) => ({label, value}))),
         },
       ],
       processName,
       processId,
-      status: status == 2 ? status : processStep == steps.length - 1 ? 1 : 0,
+      status: newStatus,
+      ...nextRole,
     };
     if (id > 0) {
       data.id = id;
@@ -138,7 +137,6 @@ const ApplyEdit = (props) => {
       }
     });
   };
-
 
   const renderFormContent = (content) => {
     content = JSON.parse(content);
@@ -157,57 +155,54 @@ const ApplyEdit = (props) => {
       </>
     );
   };
-  const start = steps && steps.length > 0
+  const start = steps && steps.length > 0;
   const isForm = status != 2 && current == processStep;
   const hasOperate = start && steps[current].Opera == 1;
-  return start ? <Card bordered={null} current={current}>
-    <Steps
-      type="navigation"
-      onChange={(e) => {
-        setCurrent(U.getValueFromEvent(e));
-      }}
-      current={current}
-    >
-      {steps.map((item, index) => {
-        const {Name, Id} = item;
-        return (
-          <Step
-            key={Id}
-            status={getStatus(index)}
-            title={Name}
-            disabled={index > processStep}
-          />
-        );
-      })}
-    </Steps>
-    {!isForm &&
-    applyForm &&
-    applyForm.length > 0 &&
-    applyForm[current] &&
-    applyForm[current].Content && (
-      <div>{renderFormContent(applyForm[current].Content)}</div>
-    )}
-    {isForm && <>
-      {!hasOperate && <div>
-        审核中
-      </div>}
-      {hasOperate && <>
-        {formContent && formContent.length > 0 &&
-        <FormRender key={current} list={formContent} onChange={changeContent}/>}
-        <div style={{textAlign: 'center'}}>
-          {steps[current].Act == 'start' ? (
-            <Button onClick={submit}>发起</Button>
-          ) : (
+  return start ? (
+    <Card bordered={null} current={current}>
+      <Steps
+        type="navigation"
+        onChange={(e) => {
+          setCurrent(U.getValueFromEvent(e));
+        }}
+        current={current}
+      >
+        {steps.map((item, index) => {
+          const {Name, Id} = item;
+          return (
+            <Step key={Id} status={getStatus(index)} title={Name} disabled={index > processStep}/>
+          );
+        })}
+      </Steps>
+      {!isForm &&
+      applyForm &&
+      applyForm.length > 0 &&
+      applyForm[current] &&
+      applyForm[current].Content && <div>{renderFormContent(applyForm[current].Content)}</div>}
+      {isForm && (
+        <>
+          {!hasOperate && <div>审核中</div>}
+          {hasOperate && (
             <>
-              <Button onClick={() => submit(1)}>审核通过</Button>
-              <Button onClick={() => submit(2)}>驳回</Button>
+              {formContent && formContent.length > 0 && (
+                <FormRender key={current} list={formContent} onChange={changeContent}/>
+              )}
+              <div style={{textAlign: 'center'}}>
+                {steps[current].Act == 'start' ? (
+                  <Button onClick={submit}>发起</Button>
+                ) : (
+                  <>
+                    <Button onClick={() => submit(1)}>审核通过</Button>
+                    <Button onClick={() => submit(2)}>驳回</Button>
+                  </>
+                )}
+              </div>
             </>
           )}
-        </div>
-      </>}
-    </>
-    }
-  </Card> : null
+        </>
+      )}
+    </Card>
+  ) : null;
 };
 
 export default ApplyEdit;
